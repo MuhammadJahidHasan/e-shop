@@ -9,12 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.newProductRouter = void 0;
-const express_1 = require("express");
-const newProductRouter = (productController) => __awaiter(void 0, void 0, void 0, function* () {
-    const router = (0, express_1.Router)();
-    router.get('/', productController.getProduct);
-    router.post('/', productController.addProduct);
-    return router;
+exports.newProductService = exports.ProductService = void 0;
+class ProductService {
+    constructor(productRepo) {
+        this.productRepo = productRepo;
+        this.productRepo = productRepo;
+    }
+    getById(id) {
+        return this.productRepo.getById(id);
+    }
+    get() {
+        return this.productRepo.get();
+    }
+    addProduct(product) {
+        return this.addProduct(product);
+    }
+    deleteProduct(id) {
+        throw new Error("Method not implemented.");
+    }
+}
+exports.ProductService = ProductService;
+const newProductService = (productRepo) => __awaiter(void 0, void 0, void 0, function* () {
+    return new ProductService(productRepo);
 });
-exports.newProductRouter = newProductRouter;
+exports.newProductService = newProductService;

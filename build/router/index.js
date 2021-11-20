@@ -9,12 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.newProductRouter = void 0;
+exports.newRouter = void 0;
 const express_1 = require("express");
-const newProductRouter = (productController) => __awaiter(void 0, void 0, void 0, function* () {
-    const router = (0, express_1.Router)();
-    router.get('/', productController.getProduct);
-    router.post('/', productController.addProduct);
-    return router;
+const productRouter_1 = require("./productRouter");
+const newRouter = (productController) => __awaiter(void 0, void 0, void 0, function* () {
+    const v1 = (0, express_1.Router)();
+    v1.use("/product", yield (0, productRouter_1.newProductRouter)(productController));
+    return v1;
 });
-exports.newProductRouter = newProductRouter;
+exports.newRouter = newRouter;
