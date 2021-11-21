@@ -14,6 +14,7 @@ const express_1 = require("express");
 const newProductRouter = (productController) => __awaiter(void 0, void 0, void 0, function* () {
     const router = (0, express_1.Router)();
     router.get('/', productController.getProduct);
+    router.get('/:id', productController.getProductById);
     router.post('/', productController.addProduct);
     return router;
 });

@@ -17,7 +17,9 @@ export class ProductController implements ProductControllerInterface {
        constructor(productService: ProductServiceInterface) {
            this.productService = productService;
            this.getProduct = this.getProduct.bind(this);
+           this.getProductById = this.getProductById.bind(this);
            this.addProduct = this.addProduct.bind(this);
+           this.deleteProduct = this.deleteProduct.bind(this);
        }
 
     async getProductById(req: Request, res: Response) { 
@@ -49,13 +51,14 @@ export class ProductController implements ProductControllerInterface {
         }
     }
     async addProduct(req: Request, res: Response) {
-        try{
-          const product = await this.productService.addProduct(req.body);
+        try {
+          const productObj = req.body;  
+          const product = await this.productService.addProduct(productObj);
           res.status(200).json({
             result: product,
             msg: 'Product added successfully',
         });
-        }catch(err){
+        } catch(err){
             console.log(err);
             res.status(500).json({
                 error: err,

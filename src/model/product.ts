@@ -57,7 +57,10 @@ Product.init({
     tableName: 'product',
     sequelize: newSequelize(),
     modelName: 'product',
+    timestamps: false
 
 });
+
+
 
 export default Product;

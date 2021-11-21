@@ -22,7 +22,7 @@ class ProductService {
         return this.productRepo.get();
     }
     addProduct(product) {
-        return this.addProduct(product);
+        return this.productRepo.addProduct(product);
     }
     deleteProduct(id) {
         throw new Error("Method not implemented.");

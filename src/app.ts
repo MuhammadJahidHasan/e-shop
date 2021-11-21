@@ -5,11 +5,12 @@ import { newProductRepo } from './repo/product';
 import express from 'express';
 import dotenv from 'dotenv';
 import {initializeMySqlConnection} from './infra/sequelize'
-
+import bodyParser from 'body-parser';
 
 const app = express();
 dotenv.config();
 app.use(express.json());
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 (async () => {
 
     initializeMySqlConnection();

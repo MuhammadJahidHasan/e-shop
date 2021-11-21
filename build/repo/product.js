@@ -27,8 +27,17 @@ class ProductRepo {
         return product_1.default.findAll();
     }
     addProduct(product) {
-        const newProduct = product_1.default.create(product);
-        return newProduct;
+        return __awaiter(this, void 0, void 0, function* () {
+            const newProduct = yield product_1.default.create({
+                title: product.title,
+                description: product.description,
+                price: product.price,
+                brand: product.brand,
+                category: product.category
+            });
+            newProduct.save();
+            return newProduct;
+        });
     }
     deleteProduct(id) {
         throw new Error("Method not implemented.");

@@ -4,7 +4,7 @@ import { ProductRepoInterface } from "../repo/product";
 export interface ProductServiceInterface {
     getById(id:string): Promise<ProductInterface | null>;
     get(): Promise<ProductInterface[]>;
-    addProduct(product: ProductInterface): any;
+    addProduct(product: ProductInterface): Promise<ProductInterface>;
     deleteProduct(id: number): Promise<ProductInterface>;
 }
 
@@ -19,8 +19,8 @@ export class ProductService implements ProductServiceInterface {
     get(): Promise<ProductInterface[]> {
         return this.productRepo.get();
     }
-    addProduct(product: ProductInterface):any {
-        return this.addProduct(product);
+    addProduct(product: ProductInterface):Promise<ProductInterface>  {
+        return this.productRepo.addProduct(product);
     }
     deleteProduct(id: number): Promise<ProductInterface> {
         throw new Error("Method not implemented.");

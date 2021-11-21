@@ -14,7 +14,9 @@ class ProductController {
     constructor(productService) {
         this.productService = productService;
         this.getProduct = this.getProduct.bind(this);
+        this.getProductById = this.getProductById.bind(this);
         this.addProduct = this.addProduct.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
     getProductById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -51,7 +53,8 @@ class ProductController {
     addProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const product = yield this.productService.addProduct(req.body);
+                const productObj = req.body;
+                const product = yield this.productService.addProduct(productObj);
                 res.status(200).json({
                     result: product,
                     msg: 'Product added successfully',
