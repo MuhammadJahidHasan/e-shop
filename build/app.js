@@ -20,14 +20,12 @@ const express_1 = __importDefault(require("express"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const sequelize_1 = require("./infra/sequelize");
 const body_parser_1 = __importDefault(require("body-parser"));
-const sequelize_2 = __importDefault(require("./infra/sequelize"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
 app.use(express_1.default.json());
 var urlencodedParser = body_parser_1.default.urlencoded({ extended: false });
 (() => __awaiter(void 0, void 0, void 0, function* () {
     (0, sequelize_1.initializeMySqlConnection)();
-    yield (0, sequelize_2.default)().sync();
     const productRepo = yield (0, product_2.newProductRepo)();
     const productService = yield (0, product_1.newProductService)(productRepo);
     const productController = yield (0, productController_1.newProductController)(productService);

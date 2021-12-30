@@ -14,7 +14,7 @@ const sequelize_1 = require("sequelize");
 class ConnectDb {
     static initialize() {
         return new sequelize_1.Sequelize('e_shop', 'root', 'root', {
-            host: 'localhost',
+            host: '172.17.0.1',
             dialect: 'mysql'
         });
     }
