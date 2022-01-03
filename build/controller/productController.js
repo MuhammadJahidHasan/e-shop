@@ -14,13 +14,16 @@ class ProductController {
     constructor(productService) {
         this.productService = productService;
         this.getProduct = this.getProduct.bind(this);
+        this.getElasticProduct = this.getElasticProduct.bind(this);
         this.getProductById = this.getProductById.bind(this);
         this.addProduct = this.addProduct.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.addProductForElastic = this.addProductForElastic.bind(this);
     }
     getProductById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                console.log('hasan');
                 const data = yield this.productService.getById(req.params.id);
                 res.status(200).json({
                     result: data,
@@ -50,11 +53,48 @@ class ProductController {
             }
         });
     }
+    getElasticProduct(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log('conabcd');
+            try {
+                console.log('abcd');
+                const product = yield this.productService.getElasticProduct();
+                res.status(200).json({
+                    result: product,
+                    msg: 'get product',
+                });
+            }
+            catch (err) {
+                console.log(err);
+                res.status(500).json({
+                    error: err,
+                });
+            }
+        });
+    }
     addProduct(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const productObj = req.body;
                 const product = yield this.productService.addProduct(productObj);
+                res.status(200).json({
+                    result: product,
+                    msg: 'Product added successfully',
+                });
+            }
+            catch (err) {
+                console.log(err);
+                res.status(500).json({
+                    error: err,
+                });
+            }
+        });
+    }
+    addProductForElastic(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const productObj = req.body;
+                const product = yield this.productService.addProductForElastic(productObj);
                 res.status(200).json({
                     result: product,
                     msg: 'Product added successfully',

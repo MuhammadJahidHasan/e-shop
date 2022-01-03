@@ -21,8 +21,16 @@ class ProductService {
     get() {
         return this.productRepo.get();
     }
+    getElasticProduct() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.productRepo.getElasticProduct();
+        });
+    }
     addProduct(product) {
         return this.productRepo.addProduct(product);
+    }
+    addProductForElastic(product) {
+        return this.productRepo.addProductForElastic(product);
     }
     deleteProduct(id) {
         throw new Error("Method not implemented.");

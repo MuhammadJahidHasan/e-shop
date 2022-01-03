@@ -5,7 +5,7 @@ export class ESClient {
     private static instance: Client;
     public static initialize(): Client {
         return new Client({
-            node: 'http://localhost:9200'
+            node: 'http://172.24.0.1:9200'
         });
     }
 

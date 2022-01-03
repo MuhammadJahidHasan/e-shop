@@ -13,9 +13,11 @@ exports.newProductRouter = void 0;
 const express_1 = require("express");
 const newProductRouter = (productController) => __awaiter(void 0, void 0, void 0, function* () {
     const router = (0, express_1.Router)();
-    router.get('/', productController.getProduct);
-    router.get('/:id', productController.getProductById);
+    // router.get('/', productController.getProduct);
+    //router.get('/:id', productController.getProductById);
     router.post('/', productController.addProduct);
+    router.post('/elastic', productController.addProductForElastic);
+    router.get('/elastic', productController.getElasticProduct);
     return router;
 });
 exports.newProductRouter = newProductRouter;

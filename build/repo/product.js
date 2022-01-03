@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.newProductRepo = exports.ProductRepo = void 0;
+const es_client_1 = __importDefault(require("../infra/es_client"));
 const product_1 = __importDefault(require("../model/product"));
 class ProductRepo {
     constructor() { }
@@ -26,6 +27,16 @@ class ProductRepo {
     get() {
         return product_1.default.findAll();
     }
+    getElasticProduct() {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("fkgj");
+            const { body } = yield (0, es_client_1.default)().search({
+                index: 'products'
+            });
+            console.log("fkgj", body);
+            return body;
+        });
+    }
     addProduct(product) {
         return __awaiter(this, void 0, void 0, function* () {
             const newProduct = yield product_1.default.create({
@@ -37,6 +48,15 @@ class ProductRepo {
             });
             newProduct.save();
             return newProduct;
+        });
+    }
+    addProductForElastic(product) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { body } = yield (0, es_client_1.default)().index({
+                index: 'products',
+                body: product
+            });
+            return body;
         });
     }
     deleteProduct(id) {

@@ -1,9 +1,13 @@
+import { SearchResponse } from "@elastic/elasticsearch/api/types";
+import newClient from "../infra/es_client";
 import Product, {ProductInterface} from "../model/product";
 
 export interface ProductRepoInterface {
     getById(id:string): Promise<ProductInterface | null>;
     get(): Promise<ProductInterface[]>;
+    getElasticProduct():Promise<SearchResponse<ProductInterface>>;
     addProduct(product: ProductInterface): Promise<ProductInterface>;
+    addProductForElastic(product: ProductInterface):Promise<SearchResponse<ProductInterface>> ;
     deleteProduct(id: number): Promise<ProductInterface>;
 }
 
@@ -20,7 +24,18 @@ export class ProductRepo implements ProductRepoInterface {
           
           return Product.findAll();
     }
-    async addProduct(product: ProductInterface):Promise<ProductInterface> {
+
+    async getElasticProduct():Promise<SearchResponse<ProductInterface>> {
+        console.log("fkgj");
+        const  {body} = await newClient().search({
+            index: 'products'
+        });
+
+        console.log("fkgj",body);
+
+        return body as SearchResponse<ProductInterface>
+    }
+    async addProduct(product: ProductInterface):Promise<ProductInterface>{
         const newProduct = await Product.create({
             title: product.title,
             description: product.description,
@@ -30,12 +45,23 @@ export class ProductRepo implements ProductRepoInterface {
 
         });
         newProduct.save();
+
         return newProduct;
     }
+
+    async addProductForElastic(product: ProductInterface):Promise<SearchResponse<ProductInterface>> {
+
+       const {body} =  await newClient().index({
+                   index: 'products',
+                   body: product
+        });
+        return body as SearchResponse<ProductInterface>;
+    }
+
+
     deleteProduct(id: number): Promise<ProductInterface> {
         throw new Error("Method not implemented.");
     }
-
 }
 
 export const newProductRepo = async (): Promise<ProductRepoInterface> => {

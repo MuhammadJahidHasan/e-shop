@@ -6,10 +6,11 @@ export class ConnectDb {
     private static instance: Sequelize;
 
     public static initialize(): Sequelize{
-          return new Sequelize('e_shop', 'root', 'root', {
+          const sq = new Sequelize('e_shop', 'root', 'root', {
             host: '172.17.0.1',
             dialect:'mysql'
          });
+         return sq;
     }
 
     public static getInstance(): Sequelize {
