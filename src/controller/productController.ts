@@ -4,11 +4,11 @@ import { ProductServiceInterface } from '../services/product';
 export interface ProductControllerInterface {
 
     getProductById(req: Request, res: Response): any;
-     getProduct(req: Request, res: Response): any;
-     getElasticProduct(req: Request, res: Response):any;
-     addProduct(req: Request, res: Response): any;
-     deleteProduct(req: Request, res: Response): any;
-     addProductForElastic(req: Request, res: Response):any;
+    getProduct(req: Request, res: Response): any;
+    getElasticProduct(req: Request, res: Response):any;
+    addProduct(req: Request, res: Response): any;
+    deleteProduct(req: Request, res: Response): any;
+    addProductForElastic(req: Request, res: Response):any;
 }
 
 export class ProductController implements ProductControllerInterface {
@@ -26,7 +26,8 @@ export class ProductController implements ProductControllerInterface {
        }
 
     async getProductById(req: Request, res: Response) { 
-        try{
+
+        try { 
             console.log('hasan');
               const data = await this.productService.getById(req.params.id);
               res.status(200).json({
@@ -34,20 +35,22 @@ export class ProductController implements ProductControllerInterface {
               });
 
 
-        }catch(err){
+        } catch(err){
             res.status(500).json({
                 error: err,
             });
         }
     }   
     async getProduct(req: Request, res: Response) {
-        console.log('get product test');
-        try{
+
+        try {
             const data = await this.productService.get();
             res.status(200).json({
-                result: data,
+                code: 'SUCCESS',
+                message: 'Retrive all product',
+                data,
             });
-        }catch(err) {
+        } catch(err) {
             console.log(err);
             res.status(500).json({
                 error: err,
@@ -56,7 +59,7 @@ export class ProductController implements ProductControllerInterface {
     }
 
     async getElasticProduct(req: Request, res: Response) {
-        console.log('conabcd');
+
           try {
             console.log('abcd');
             const product = await this.productService.getElasticProduct(); 
@@ -65,7 +68,7 @@ export class ProductController implements ProductControllerInterface {
                 msg: 'get product',
             });
 
-          }catch(err) {
+          } catch(err) {
             console.log(err);
             res.status(500).json({
                 error: err,
@@ -73,6 +76,7 @@ export class ProductController implements ProductControllerInterface {
           }
     }
     async addProduct(req: Request, res: Response) {
+
         try {
           const productObj = req.body;  
           const product = await this.productService.addProduct(productObj);
@@ -89,6 +93,7 @@ export class ProductController implements ProductControllerInterface {
     }
 
     async addProductForElastic(req: Request, res: Response) {
+
         try {
           const productObj = req.body;  
           const product = await this.productService.addProductForElastic(productObj);
@@ -112,7 +117,7 @@ export class ProductController implements ProductControllerInterface {
 }
 
 export const newProductController = async (productService: ProductServiceInterface): Promise<ProductController> => {
-             return new ProductController(productService);  
+        return new ProductController(productService);  
 };
 
 

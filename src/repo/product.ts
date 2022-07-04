@@ -13,6 +13,7 @@ export interface ProductRepoInterface {
 
 export class ProductRepo implements ProductRepoInterface {
        constructor() {}
+
     getById(id: string): Promise<ProductInterface | null> {
        return Product.findOne({
            where:{
@@ -20,22 +21,22 @@ export class ProductRepo implements ProductRepoInterface {
            }
        });
     }
-    get(): Promise<ProductInterface[]> {
+    async get(): Promise<ProductInterface[]> {
           
-          return Product.findAll();
+          const product = await Product.findAll();
+          return product;
     }
 
     async getElasticProduct():Promise<SearchResponse<ProductInterface>> {
-        console.log("fkgj");
+        
         const  {body} = await newClient().search({
             index: 'products'
         });
 
-        console.log("fkgj",body);
-
         return body as SearchResponse<ProductInterface>
     }
     async addProduct(product: ProductInterface):Promise<ProductInterface>{
+
         const newProduct = await Product.create({
             title: product.title,
             description: product.description,
@@ -55,6 +56,7 @@ export class ProductRepo implements ProductRepoInterface {
                    index: 'products',
                    body: product
         });
+
         return body as SearchResponse<ProductInterface>;
     }
 
