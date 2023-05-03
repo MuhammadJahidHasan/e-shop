@@ -24,7 +24,7 @@ export class ProductRepo implements ProductRepoInterface {
     async get(): Promise<ProductInterface[]> {
           
           const product = await Product.findAll();
-          console.log('user repo');
+          console.log('user repo new');
           return product;
     }
 
