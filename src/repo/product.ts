@@ -15,7 +15,6 @@ export class ProductRepo implements ProductRepoInterface {
        constructor() {}
 
     getById(id: string): Promise<ProductInterface | null> {
-        console.log('get user');
        return Product.findOne({
            where:{
                id:id
