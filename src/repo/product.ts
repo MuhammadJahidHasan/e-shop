@@ -52,7 +52,7 @@ export class ProductRepo implements ProductRepoInterface {
     }
 
     async addProductForElastic(product: ProductInterface):Promise<SearchResponse<ProductInterface>> {
-
+       console.log('add product elastic');
        const {body} =  await newClient().index({
                    index: 'products',
                    body: product
