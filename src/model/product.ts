@@ -20,7 +20,7 @@ class Product extends Model implements ProductInterface {
       public brand!: string;
       public category!: string; 
 }
-
+// product model user branch
 Product.init({
 
       id: {
