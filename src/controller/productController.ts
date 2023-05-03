@@ -77,6 +77,7 @@ export class ProductController implements ProductControllerInterface {
     async addProduct(req: Request, res: Response) {
 
         try {
+          console.log('add product');  
           const productObj = req.body;  
           const product = await this.productService.addProduct(productObj);
           res.status(200).json({
