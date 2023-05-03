@@ -28,7 +28,6 @@ export class ProductController implements ProductControllerInterface {
     async getProductById(req: Request, res: Response) { 
 
         try { 
-            console.log('hasan');
               const data = await this.productService.getById(req.params.id);
               res.status(200).json({
                   result: data,

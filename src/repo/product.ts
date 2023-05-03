@@ -29,7 +29,7 @@ export class ProductRepo implements ProductRepoInterface {
     }
 
     async getElasticProduct():Promise<SearchResponse<ProductInterface>> {
-        
+        console.log('add a commit in product branch');
         const  {body} = await newClient().search({
             index: 'products'
         });
