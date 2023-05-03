@@ -11,7 +11,7 @@ export interface Explanation {
     description: string;
     details: Explanation[];
 }
-
+// common 
 export interface SearchResponse<T> {
     took: number;
     timed_out: boolean;
